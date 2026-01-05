@@ -3,6 +3,9 @@
 
 generator client {
   provider = "prisma-client-js"
+  // Include binaries for both Alpine (musl, OpenSSL 3) and glibc (OpenSSL 3)
+  // so the generated client works on Railway regardless of base image.
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x", "linux-openssl-3.0.x"]
 }
 
 datasource db {

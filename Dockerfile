@@ -1,5 +1,8 @@
 FROM node:18-alpine
 
+# Install OpenSSL and other dependencies required by Prisma
+RUN apk add --no-cache openssl openssl-dev libc6-compat
+
 WORKDIR /app
 
 # Copy package files first for better layer caching
@@ -8,6 +11,9 @@ COPY prisma ./prisma/
 
 # Install all dependencies (needed for build)
 RUN npm ci && npm cache clean --force
+
+# Generate Prisma client
+RUN npx prisma generate
 
 # Copy source code
 COPY . .

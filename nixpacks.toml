@@ -1,12 +1,16 @@
-# Configure nixpacks for TypeScript build
+# Configure nixpacks for TypeScript build with Prisma support
 [phases.setup]
-nixPkgs = ["nodejs-18_x"]
+nixPkgs = ["nodejs-18_x", "openssl"]
+aptPkgs = ["openssl", "libssl-dev", "ca-certificates"]
 
 [phases.install]
-cmds = ["npm install"]
+cmds = [
+  "npm install",
+  "npx prisma generate"
+]
 
 [phases.build]
 cmds = ["npm run build"]
 
 [start]
-cmd = "node index.js"
+cmd = "npm start"

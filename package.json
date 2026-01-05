@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc && npx prisma generate",
-    "start": "node index.js",
+    "postbuild": "node scripts/postbuild-fixes.js",
+    "postinstall": "prisma generate",
+    "start": "node dist/index.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
@@ -30,7 +32,7 @@
     "@fastify/oauth2": "^7.8.0",
     "@fastify/rate-limit": "^10.3.0",
     "@googleapis/gmail": "^8.0.0",
-    "@prisma/client": "^5.9.1",
+    "@prisma/client": "5.22.0",
     "bullmq": "^5.1.4",
     "dotenv": "^16.4.1",
     "fastify": "^4.25.2",
@@ -43,7 +45,7 @@
     "openai": "^4.26.1",
     "pino": "^8.17.2",
     "pino-pretty": "^10.3.1",
-    "prisma": "^5.9.1",
+    "prisma": "5.22.0",
     "typescript": "^5.3.3",
     "@types/node": "^20.11.5",
     "zod": "^3.22.4"
